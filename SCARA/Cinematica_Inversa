@@ -1,0 +1,36 @@
+clc
+clear 
+close all
+
+% Ingrese las coordenadas cartesianas aqui:
+x = 2;
+y = 4;
+z = 10;
+
+% Definir parámetros del robot
+a1 = 10; % Longitud del primer eslabón en unidades de longitud
+a2 = 8;  % Longitud del segundo eslabón en unidades de longitud
+
+s=x;
+r=y;
+% Calcular D
+D = (s^2 + r^2 - a1^2 - a2^2) / (2 * a1 * a2);
+
+% Verificar si D está dentro del rango válido
+    if abs(D) > 1
+        error('No es posible calcular la cinemática inversa: posición fuera del espacio de trabajo');
+    end
+
+% Calcular theta2
+%theta2 = atan2(sqrt(1 - cos(theta2)), cos(theta2));
+theta2 = atan2(sqrt(1 - D^2), D);
+
+% Calcular theta1
+theta1 = atan2(y, x) - atan2(a2 * sin(theta2), a1 + a2 * cos(theta2));
+
+% Combinar ángulos y distancia en una matriz de 6x1
+coordenadas_generalizadas = [theta1; theta2; z];
+
+% Mostrar los resultados
+disp('Coordenadas generalizadas (theta1, theta2, d3):');
+disp(coordenadas_generalizadas);
