@@ -1,0 +1,26 @@
+clc
+clear 
+close all
+
+% Ingrese las coordenadas cartesianas aqui:
+theta1 = pi/4;
+theta2 = pi/3;
+d3 = 5;
+
+% Definir parámetros del robot
+a1 = 10; % Longitud del primer eslabón en unidades de longitud
+a2 = 8;  % Longitud del segundo eslabón en unidades de longitud
+
+% Calcular la posición en coordenadas cartesianas
+x = a1 * cos(theta1) + a2 * cos(theta1 + theta2);
+y = a1 * sin(theta1) + a2 * sin(theta1 + theta2);
+z = d3;
+
+% Combinar posición y orientación en una matriz de 6x1
+posicion_orientacion = [x; y; z];
+
+% Mostrar los resultados
+disp('Posición del Efector Final:');
+disp(posicion_orientacion);
+
+
